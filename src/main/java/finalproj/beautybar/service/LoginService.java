@@ -15,6 +15,13 @@ public class LoginService {
         return loginService;
     }
 
+    /**
+     * Checks login and password
+     *
+     * @param login
+     * @param password
+     * @return true if user with such login and password exists
+     */
     public boolean authentificate(String login, String password){
         IClientDAO clientDAO = DAOFactory.getClientDAO();
         Client client = null;

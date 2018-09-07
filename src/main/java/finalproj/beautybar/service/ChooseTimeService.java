@@ -19,6 +19,14 @@ public class ChooseTimeService {
         return CHOOSE_TIME_SERVICE;
     }
 
+    /**
+     * Gets free times for booking
+     *
+     * @param name
+     * @param date
+     * @return list of <code>Integer</code> times free for booking
+     * @throws Exception
+     */
     public List<Integer> getFreeTimes(String name, Date date) throws Exception {
         List<Integer> freeHours = new ArrayList<>();
         Calendar calendar = Calendar.getInstance();
@@ -26,10 +34,13 @@ public class ChooseTimeService {
         List<Time> startAndEnd = getTimesByMaster(name).get(calendar.get(Calendar.DAY_OF_WEEK));
         List<Booking> bookingList = getAllBookingsByMasterAndDate(name, date);
 
-        calendar.setTime(startAndEnd.get(0));
+        final int START_WORKING_TIME = 0;
+        final int END_WORKING_TIME = 1;
+        calendar.setTime(startAndEnd.get(START_WORKING_TIME));
         int startHour = calendar.get(Calendar.HOUR_OF_DAY);
-        calendar.setTime(startAndEnd.get(1));
+        calendar.setTime(startAndEnd.get(END_WORKING_TIME));
         int endHour = calendar.get(Calendar.HOUR_OF_DAY);
+
         for (int i = startHour; i < endHour; i++) {
             List<Integer> busyHours = bookingList.stream().map(p -> {
                 calendar.setTime(p.getTimestamp());
@@ -38,17 +49,24 @@ public class ChooseTimeService {
             if (!busyHours.contains(i)) {
                 freeHours.add(i);
             }
-
         }
 
         return freeHours;
     }
 
+    /**
+     * Gets all booking by given date and master
+     *
+     * @param name
+     * @param date
+     * @return list of master's booking at given name
+     * @throws Exception
+     */
     public List<Booking> getAllBookingsByMasterAndDate(String name, Date date) throws Exception {
         List<Booking> list = new ArrayList<>();
         ChooseDateService chooseDateService = ChooseDateService.getChooseDateService();
         Calendar calendar = Calendar.getInstance();
-        chooseDateService.getAllBookingsByMasterAfterCurrentCurrentDate(name).stream()
+        chooseDateService.getAllBookingsByMasterAfterCurrentDate(name).stream()
                 .filter((p) -> {
                     calendar.setTime(p.getTimestamp());
                     calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -62,11 +80,23 @@ public class ChooseTimeService {
         return list;
     }
 
+    /**
+     * Gets list of stat and end of working day.
+     * Index means week day number starting from 1 which is Sunday
+     *
+     * @param name
+     * @return list of list containing start and end of working day
+     * @throws Exception
+     */
     public List<List<Time>> getTimesByMaster(String name) throws Exception {
         List<List<Time>> list = new ArrayList<>();
         ChooseDateService chooseDateService = ChooseDateService.getChooseDateService();
         Scedule scedule = chooseDateService.getSceduleByMasterName(name);
 
+        /**
+         * Neeed to start from 1 because <code>calendar.get(Calendar.DAY_OF_WEEK)</code>
+         * returns values from 1 till 7
+         */
         list.add(0, null);
         list.add(1, Arrays.asList(scedule.getStartSun(), scedule.getEndSun()));
         list.add(2, Arrays.asList(scedule.getStartMon(), scedule.getEndMon()));

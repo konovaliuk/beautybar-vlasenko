@@ -20,6 +20,11 @@ public class ChooseMasterService {
         return chooseMasterService;
     }
 
+    /**
+     * Gets all <code>WorkerService</code>
+     *
+     * @return list of <code>WorkerService</code>
+     */
     public List<WorkerService> getAllWorkerServices(){
         List<WorkerService> list = new ArrayList<>();
         IWorkerServiceDAO workerServiceDAO = DAOFactory.getWorkerServiceDAO();
@@ -31,6 +36,13 @@ public class ChooseMasterService {
         return list;
     }
 
+    /**
+     * Gets all masters providing given service
+     *
+     * @param service
+     * @return list of masters by service
+     * @throws Exception
+     */
     public List<Worker> getAllMastersByService(String service) throws Exception{
         List<Worker> list = new ArrayList<>();
         IServiceDAO serviceDAO = DAOFactory.getServiceDAO();
@@ -44,6 +56,13 @@ public class ChooseMasterService {
         return list;
     }
 
+    /**
+     * Gets all master's names providing given service
+     *
+     * @param service
+     * @return list of master's names
+     * @throws Exception
+     */
     public List<String> getAllMastersNamesByService(String service) throws Exception{
         List<String> list = new ArrayList<>();
         getAllMastersByService(service).forEach((p) ->

@@ -45,7 +45,7 @@ public class CommandLoginTest {
         when(request.getParameter("password")).thenReturn(pass);
         PowerMockito.mockStatic(LoginService.class);
         when(LoginService.getLoginService()).thenReturn(loginService);
-        commandLogin = new CommandLogin();
+        commandLogin = CommandLogin.getInstance();
     }
 
     @Test

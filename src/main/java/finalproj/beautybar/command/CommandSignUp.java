@@ -2,30 +2,34 @@ package finalproj.beautybar.command;
 
 import finalproj.beautybar.manager.Config;
 import finalproj.beautybar.manager.Message;
+import finalproj.beautybar.manager.Parameter;
 import finalproj.beautybar.service.SignUpService;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-
 public class CommandSignUp implements ICommand{
 
-    private static final String EMAIL = "email";
-    private static final String PASSWORD = "password";
-    private static final String NAME = "name";
-    private static final String PHONE = "phone";
-    private static int workload = 31;
+    private static CommandSignUp instance;
+
+    private CommandSignUp(){}
+
+    public static CommandSignUp getInstance(){
+        if (instance == null){
+            instance = new CommandSignUp();
+        }
+        return instance;
+    }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse responce) throws Exception {
         String page = null;
-        String email = request.getParameter(EMAIL);
-        String salt = BCrypt.gensalt(workload);
-        String hashedPassword = BCrypt.hashpw(request.getParameter(PASSWORD), salt);
-        String name = request.getParameter(NAME);
-        String phone = request.getParameter(PHONE);
+        String email = request.getParameter(Parameter.EMAIL.toString());
+        String salt = BCrypt.gensalt();
+        String hashedPassword = BCrypt.hashpw(request.getParameter(Parameter.PASSWORD.toString()), salt);
+        String name = request.getParameter(Parameter.NAME.toString());
+        String phone = request.getParameter(Parameter.PHONE.toString());
 
         SignUpService signUpService = SignUpService.getSignUpService();
 
@@ -36,7 +40,6 @@ public class CommandSignUp implements ICommand{
             page = Config.getInstance().getProperty(Config.ERROR);
         }
 
-        System.out.println("CommandSignUp");
         return page;
     }
 }

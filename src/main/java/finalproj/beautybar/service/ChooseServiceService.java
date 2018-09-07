@@ -19,6 +19,11 @@ public class ChooseServiceService {
         return chooseServiceService;
     }
 
+    /**
+     * Gets all servicetypes
+     *
+     * @return list of servicetypes
+     */
     public List<ServiceType> getAllServiceTypes(){
         IServiceTypeDAO serviceTypeDAO = DAOFactory.getServiceTypeDAO();
         List<ServiceType> list = new ArrayList<>();
@@ -30,6 +35,11 @@ public class ChooseServiceService {
         return list;
     }
 
+    /**
+     * Gets all services
+     *
+     * @return list of services
+     */
     public List<Service> getAllServices(){
         IServiceDAO serviceDAO = DAOFactory.getServiceDAO();
         List<Service> list = new ArrayList<>();
@@ -41,15 +51,4 @@ public class ChooseServiceService {
         return list;
     }
 
-    public List<Service> getServiceIdByName(String name){
-        IServiceDAO serviceDAO = DAOFactory.getServiceDAO();
-        List<Service> list = new ArrayList<>();
-        try {
-           // serviceDAO.findEntityById()
-//            getAllServices().stream().filter((p)-> p.getName().equals(name)).forEach(list::add);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
 }

@@ -12,7 +12,7 @@
     <title>Title</title>
 </head>
 <body>
-    <c:out value="${user}, Вы записаны на ${service} ${date}!"/>
+    <c:out value="${user}, Вы записаны на ${service} ${timestamp}!"/>
     <c:out value="К мастеру ${master}!"/>
 
 </body>

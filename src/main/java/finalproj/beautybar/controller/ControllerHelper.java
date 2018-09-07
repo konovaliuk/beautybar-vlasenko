@@ -10,22 +10,22 @@ public class ControllerHelper {
     HashMap<String, ICommand> commands = new HashMap<String, ICommand>();
 
     private ControllerHelper() {
-        commands.put("login", new CommandLogin());
-        commands.put("signup", new CommandSignUp());
-        commands.put("settings", new CommandSettings());
-        commands.put("chooseservicetype", new CommandChooseServiceType());
-        commands.put("chooseservice", new CommandChooseService());
-        commands.put("choosedate", new CommandChooseDate());
-        commands.put("choosemaster", new CommandChooseMaster());
-        commands.put("choosetime", new CommandChooseTime());
-        commands.put("recordbooking", new CommandRecordBooking());
+        commands.put("login",  CommandLogin.getInstance());
+        commands.put("signup",  CommandSignUp.getInstance());
+        commands.put("settings",  CommandSettings.getInstance());
+        commands.put("chooseservicetype",  CommandChooseServiceType.getInstance());
+        commands.put("chooseservice",  CommandChooseService.getInstance());
+        commands.put("choosedate", CommandChooseDate.getInstance());
+        commands.put("choosemaster",  CommandChooseMaster.getInstance());
+        commands.put("choosetime",  CommandChooseTime.getInstance());
+        commands.put("recordbooking",  CommandRecordBooking.getInstance());
 
     }
 
     public ICommand getCommand(HttpServletRequest request) {
         ICommand command = commands.get(request.getParameter("command"));
         if (command == null) {
-            command = new CommandMissing();
+            command = CommandMissing.getInstance();
         }
         return command;
     }

@@ -25,6 +25,13 @@ public class ChooseDateService {
         return CHOOSE_DATE_SERVICE;
     }
 
+    /**
+     * Gets <code>Scedule</code> by master's name
+     *
+     * @param name
+     * @return <code>Scedule</code> by given name
+     * @throws Exception
+     */
     public Scedule getSceduleByMasterName(String name) throws Exception {
         Scedule scedule = null;
         List<Scedule> sceduleList = new ArrayList<>();
@@ -34,10 +41,16 @@ public class ChooseDateService {
         return scedule;
     }
 
+    /**
+     * Gets not working weekdays by master's name
+     *
+     * @param name
+     * @return list of weekday's numbers
+     * @throws Exception
+     */
     public List<Integer> getDisabledDaysByMasterName(String name) throws Exception {
         List<Integer> list = new ArrayList<>();
         Scedule scedule = getSceduleByMasterName(name);
-        System.out.println(scedule);
 
         if (scedule.getStartMon() == null) list.add(1);
         if (scedule.getStartTue() == null) list.add(2);
@@ -50,16 +63,20 @@ public class ChooseDateService {
         return list;
     }
 
+    /**
+     * Gets busy dates by master's name
+     *
+     * @param name
+     * @return list of dates not havin free slots for booking
+     * @throws Exception
+     */
     public List<Date> getDisabledDatesByMasterName(String name) throws Exception {
         List<Date> dates = new ArrayList<>();
-        Scedule scedule = getSceduleByMasterName(name);
-        System.out.println(scedule);
         Calendar calendar = Calendar.getInstance();
         Map<Date, Integer> hoursPerDate = getHoursPerDateByMaster(name);
         Map<Integer, Integer> workingHours = getWorkingDaysAndHoursByMaster(name);
 
         hoursPerDate.forEach((k, v) -> {
-            System.out.println("k - "+ k + ", v - " + v);
             calendar.setTime(k);
             if ((workingHours.get(calendar.get(Calendar.DAY_OF_WEEK)) - v) < 1) dates.add(k);
         });
@@ -67,7 +84,14 @@ public class ChooseDateService {
         return dates;
     }
 
-    public List<Booking> getAllBookingsByMasterAfterCurrentCurrentDate(String name) throws Exception {
+    /**
+     * Gets all master's bookings after current date
+     *
+     * @param name
+     * @return list of bookings after current date by given master
+     * @throws Exception
+     */
+    public List<Booking> getAllBookingsByMasterAfterCurrentDate(String name) throws Exception {
         List<Booking> list = new ArrayList<>();
         IBookingDAO bookingDAO = DAOFactory.getBookingDAO();
         IWorkerDAO workerDAO = DAOFactory.getWorkerDAO();
@@ -81,10 +105,24 @@ public class ChooseDateService {
         return list;
     }
 
+    /**
+     * Gets working houts by start and end times
+     *
+     * @param startTime
+     * @param endTime
+     * @return amount of working hours
+     */
     public int getWorkingHours(Time startTime, Time endTime) {
         return (int) ((endTime.getTime() - startTime.getTime()) / 3600000);
     }
 
+    /**
+     * Gets working hours per week day
+     *
+     * @param name
+     * @return <code>Map</code> of working hours per week day
+     * @throws Exception
+     */
     private Map<Integer, Integer> getWorkingDaysAndHoursByMaster(String name) throws Exception {
         Map<Integer, Integer> map = new HashMap<>();
         Scedule scedule = getSceduleByMasterName(name);
@@ -112,20 +150,24 @@ public class ChooseDateService {
         return map;
     }
 
+    /**
+     * Gets amount of busy hours grouping by date
+     *
+     * @param name
+     * @return <code>Map</code> of busy hours grouping by date
+     * @throws Exception
+     */
     private Map<Date, Integer> getHoursPerDateByMaster(String name) throws Exception {
         Map<Date, Integer> hoursPerDate = new HashMap<>();
-        List<Booking> bookingList = getAllBookingsByMasterAfterCurrentCurrentDate(name);
+        List<Booking> bookingList = getAllBookingsByMasterAfterCurrentDate(name);
         Calendar calendar = Calendar.getInstance();
-        hoursPerDate = bookingList.stream().collect(groupingBy((p)->{
-
+        hoursPerDate = bookingList.stream().collect(groupingBy((p) -> {
             calendar.setTime(p.getTimestamp());
             calendar.set(Calendar.HOUR_OF_DAY, 0);
             calendar.set(Calendar.MINUTE, 0);
             calendar.set(Calendar.SECOND, 0);
             calendar.set(Calendar.MILLISECOND, 0);
-
             return calendar.getTime();
-
         }, summingInt(Booking::getDuration)));
         return hoursPerDate;
     }

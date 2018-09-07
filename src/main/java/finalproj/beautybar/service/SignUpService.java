@@ -14,6 +14,15 @@ public class SignUpService {
         return signUpService;
     }
 
+    /**
+     * Registers user
+     *
+     * @param name
+     * @param email
+     * @param phone
+     * @param hashedPassword
+     * @return true if signing up was succeful
+     */
     public boolean signUp(String name, String email, String phone, String hashedPassword){
         IClientDAO clientDAO = DAOFactory.getClientDAO();
 

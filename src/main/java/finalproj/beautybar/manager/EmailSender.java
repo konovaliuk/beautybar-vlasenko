@@ -25,14 +25,18 @@ public class EmailSender {
         return instance;
     }
 
+    /**
+     * Sends an email
+     *
+     * @param to
+     * @param timestamp
+     * @param master
+     * @throws MessagingException
+     */
     public void sendEmail(String to, Timestamp timestamp, String master) throws MessagingException {
-        // Recipient's email ID needs to be mentioned.
-       // String to = "klementinaklementina7@gmail.com";
-
-        // Sender's email ID needs to be mentioned
-
-
-        // Get system properties
+        /** Get system properties
+         *
+         */
         Properties properties = System.getProperties();
 
         properties.setProperty("mail.smtp.host", "smtp.gmail.com");
@@ -44,8 +48,6 @@ public class EmailSender {
         properties.put("mail.debug", "true");
         properties.put("mail.store.protocol", "pop3");
         properties.put("mail.transport.protocol", "smtp");
-
-
         try{
             Session session = Session.getDefaultInstance(properties,
                     new Authenticator(){
@@ -53,26 +55,37 @@ public class EmailSender {
                             return new PasswordAuthentication(username, password);
                         }});
 
-            // Create a default MimeMessage object.
+            /** Create a default MimeMessage object.
+             *
+             */
             MimeMessage message = new MimeMessage(session);
 
-            // Set From: header field of the header.
+            /**Set From: header field of the header.
+             *
+             */
             message.setFrom(new InternetAddress(from));
 
-            // Set To: header field of the header.
+            /** Set To: header field of the header.
+             *
+             */
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-
-            // Set Subject: header field
+            /**
+            * Set Subject: header field
+            */
             message.setSubject("Запись в салон красоты");
 
-            // Now set the actual message
+            /** Now set the actual message
+             *
+             */
             String text = "Вы записаны в салон красоты\n"
                     + timestamp + "\n"
                     + "к мастеру " + master
                     + ".\n Оставьте, пожалуйста отзыв";
             message.setText(text);
 
-            // Send message
+            /** Send message
+             *
+             */
             Transport.send(message);
             System.out.println("Sent message successfully....");
         } catch (MessagingException mex) {

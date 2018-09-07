@@ -7,27 +7,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import finalproj.beautybar.manager.Parameter;
 import finalproj.beautybar.service.LoginService;
-import org.mindrot.jbcrypt.BCrypt;
 
-public class CommandLogin implements ICommand{
+public class CommandLogin implements ICommand {
 
-    private static final String LOGIN = "login";
-    private static final String PASSWORD = "password";
-    private static int workload = 31;
+    private static CommandLogin instance;
 
+    private CommandLogin(){}
+
+    public static CommandLogin getInstance(){
+        if (instance == null){
+            instance = new CommandLogin();
+        }
+        return instance;
+    }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String page = null;
         HttpSession session = request.getSession();
-        String login = request.getParameter(LOGIN);
-        String password = request.getParameter(PASSWORD);
         LoginService loginService = LoginService.getLoginService();
-        if (loginService.authentificate(login,password)) {
-            session.setAttribute("user", login);
+
+        String login = request.getParameter(Parameter.LOGIN.toString());
+        String password = request.getParameter(Parameter.PASSWORD.toString());
+
+        if (loginService.authentificate(login, password)) {
+            session.setAttribute(Parameter.USER.toString(), login);
             page = request.getRequestURI() +       // "/servlettest"
-                    "?" + session.getAttribute("currentquery").toString();
+                    "?" + session.getAttribute(Parameter.CURRENTQUERY.toString()).toString();
 
         } else {
             request.setAttribute("error", Message.getInstance().getProperty(Message.LOGIN_ERROR));
