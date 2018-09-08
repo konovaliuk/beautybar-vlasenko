@@ -70,4 +70,18 @@ public class ChooseMasterService {
         );
         return list;
     }
+
+    /**
+     * Gets all master's names providing given service
+     *
+     * @return list of master's names
+     * @throws Exception
+     */
+    public List<String> getAllMastersNames() throws Exception{
+        List<String> list = new ArrayList<>();
+        IWorkerDAO workerDAO = DAOFactory.getWorkerDAO();
+
+        workerDAO.findAll().stream().filter((p)-> p.getRole().getId()==2).forEach((p)->list.add(p.getName()));
+        return list;
+    }
 }

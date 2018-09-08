@@ -19,6 +19,10 @@ public class ControllerHelper {
         commands.put("choosemaster",  CommandChooseMaster.getInstance());
         commands.put("choosetime",  CommandChooseTime.getInstance());
         commands.put("recordbooking",  CommandRecordBooking.getInstance());
+        commands.put("feedbackmasters",  CommandFeedbackMasters.getInstance());
+        commands.put("writefeedback",  CommandWriteFeedback.getInstance());
+        commands.put("postfeedback",  CommandPostFeedback.getInstance());
+
 
     }
 

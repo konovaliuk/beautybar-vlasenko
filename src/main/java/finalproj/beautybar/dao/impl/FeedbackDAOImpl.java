@@ -19,7 +19,9 @@ import java.util.List;
 public class FeedbackDAOImpl extends AbstractDAO<Long, Feedback> implements IFeedbackDAO {
 
     protected final String SQL_INNER_JOIN = " INNER JOIN client ON feedback.idclient=client.idclient" +
-            " INNER JOIN worker ON feedback.idmaster=worker.idworker";
+            " INNER JOIN worker ON feedback.idmaster=worker.idworker  Order by feedback.date DESC ";
+    protected final String SQL_LIMIT = " LIMIT ?, ?";
+
 
     protected static final int COLUMN_FEEDBACKID = 1;
     protected static final int COLUMN_CLIENTID = 2;
@@ -50,8 +52,34 @@ public class FeedbackDAOImpl extends AbstractDAO<Long, Feedback> implements IFee
     }
 
     @Override
-    public List<Feedback> findAll() throws Exception {
-        return findByDynamicSelect(SQL_SELECT_FROM + SQL_INNER_JOIN, null);
+    public List<Feedback> findAll(int offset, int numberOfRows) throws Exception {
+        return findByDynamicSelect(SQL_SELECT_FROM + SQL_INNER_JOIN + SQL_LIMIT, new Object[]{offset, numberOfRows});
+    }
+
+    @Override
+    public int countRows() throws Exception {
+        ResultSet rs = null;
+        int numberOfRows = 0;
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = ConnectionPool.getConnection();
+            final String SQL = SQL_COUNT;
+            System.out.println("Executing " + SQL);
+            // prepare statement
+            statement = connection.prepareStatement(SQL);
+            rs = statement.executeQuery();
+            if (rs.next()) {
+                numberOfRows = rs.getInt(1);
+                statement.executeQuery();
+            }
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        finally {
+            close(connection);
+        }
+        return numberOfRows;
     }
 
     @Override

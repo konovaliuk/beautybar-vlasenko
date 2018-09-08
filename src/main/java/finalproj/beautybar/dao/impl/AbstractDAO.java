@@ -18,6 +18,7 @@ public abstract class AbstractDAO<K, T extends Entity> {
     protected final String SQL_DELETE = "DELETE FROM " + getTableName();
     protected final String SQL_INSERT = "INSERT INTO " + getTableName();
     protected final String SQL_UPDATE = "UPDATE " + getTableName();
+    protected final String SQL_COUNT = "SELECT COUNT(*) FROM " + getTableName();
 
     // protected WrapperConnector connector;
 //    public List<T> findAll() throws Exception {

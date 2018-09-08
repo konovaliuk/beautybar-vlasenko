@@ -223,15 +223,6 @@
                                     form.submit();
 
                                 }
-
-//                                disableDates: function (date) {
-//                                    var disabled = [13,14,20,21];
-//                                    if (date && disabled.indexOf(date.getDate()) > -1 ) {
-//                                        return true;
-//                                    } else {
-//                                        return false;
-//                                    }
-//                                }
                             });
                             function compareDates(date, dates) {
                                 for (var k = 0; k < dates.length; k++) {

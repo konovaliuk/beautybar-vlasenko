@@ -36,7 +36,6 @@ public class CommandLogin implements ICommand {
             session.setAttribute(Parameter.USER.toString(), login);
             page = request.getRequestURI() +       // "/servlettest"
                     "?" + session.getAttribute(Parameter.CURRENTQUERY.toString()).toString();
-
         } else {
             request.setAttribute("error", Message.getInstance().getProperty(Message.LOGIN_ERROR));
             page = Config.getInstance().getProperty(Config.ERROR);

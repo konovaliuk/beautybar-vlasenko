@@ -7,13 +7,17 @@ import java.util.List;
 
 public interface IFeedbackDAO {
 
+
     /**
      * Gets all Bookings from database
      *
+     * @param offset
+     * @param numberOfRows
      * @return List of all bookings
      * @throws Exception
      */
-    List<Feedback> findAll() throws Exception;
+    List<Feedback> findAll(int offset, int numberOfRows) throws Exception;
+    int countRows() throws Exception;
 
     /**
      * Gets entity from database by id

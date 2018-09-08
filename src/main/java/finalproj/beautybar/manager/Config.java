@@ -25,6 +25,8 @@ public class Config {
     public static final String CHOOSEMASTER = "CHOOSEMASTER";
     public static final String CHOOSETIME = "CHOOSETIME";
     public static final String RECORDBOOKING = "RECORDBOOKING";
+    public static final String FEEDBACKMASTERS = "FEEDBACKMASTERS";
+    public static final String WRITEFEEDBACK = "WRITEFEEDBACK";
 
     public static Config getInstance() {
         if (instance == null) {

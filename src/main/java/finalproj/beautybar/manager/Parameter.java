@@ -3,6 +3,12 @@ package finalproj.beautybar.manager;
 public enum Parameter {
 
     EMAIL("email"),
+    COMMENT("comment"),
+    PAGENUMBER("pagenumber"),
+    PAGENUMBERS("pagenumbers"),
+    TOTALPAGES("totalPages"),
+    FEEDBACKS("feedbacks"),
+    MARK("mark"),
     NAME("name"),
     PHONE("phone"),
     LOGIN("login"),

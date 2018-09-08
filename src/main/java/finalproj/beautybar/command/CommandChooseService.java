@@ -13,9 +13,7 @@ import java.util.List;
 public class CommandChooseService implements ICommand {
 
     private static CommandChooseService instance;
-
     private CommandChooseService(){}
-
     public static CommandChooseService getInstance(){
         if (instance == null){
             instance = new CommandChooseService();
