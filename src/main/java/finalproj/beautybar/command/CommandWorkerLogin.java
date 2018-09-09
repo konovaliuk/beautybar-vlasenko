@@ -24,7 +24,7 @@ public class CommandWorkerLogin implements ICommand{
         String password = request.getParameter(Parameter.PASSWORD.toString());
 
         if (workerLoginService.authentificate(login, password)) {
-            session.setAttribute(Parameter.USER.toString(), login);
+            session.setAttribute(Parameter.WORKERLOGIN.toString(), login);
 
             List<String> list = new ArrayList<>();
             list = chooseMasterService.getAllMastersNames();
