@@ -1,9 +1,6 @@
 package finalproj.beautybar.service;
 
-import finalproj.beautybar.dao.DAOFactory;
-import finalproj.beautybar.dao.IBookingDAO;
-import finalproj.beautybar.dao.ISceduleDAO;
-import finalproj.beautybar.dao.IWorkerDAO;
+import finalproj.beautybar.dao.*;
 import finalproj.beautybar.entity.Booking;
 import finalproj.beautybar.entity.Scedule;
 
@@ -95,13 +92,22 @@ public class ChooseDateService {
         List<Booking> list = new ArrayList<>();
         IBookingDAO bookingDAO = DAOFactory.getBookingDAO();
         IWorkerDAO workerDAO = DAOFactory.getWorkerDAO();
+        IServiceDAO serviceDAO = DAOFactory.getServiceDAO();
 
         bookingDAO.findAll().stream()
                 .filter(
                         (p) -> (workerDAO.findEntityById(p.getWorkerService().getWorker().getId()).getName().equals(name))
                                 && ((p.getTimestamp().after(new Timestamp(new Date().getTime()))))
                 )
-                .forEach(list::add);
+                .forEach((p)->{
+
+                    try {
+                        p.getWorkerService().setService(serviceDAO.findEntityById(p.getWorkerService().getService().getId()));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    list.add(p);
+                });
         return list;
     }
 

@@ -16,7 +16,7 @@
 <table>
     <c:forEach items="${masters}" var="item">
         <tr>
-            <td><a href="Servlettest?command=writefeedback&master=${item}&pagenumber=1">
+            <td><a href="Servlettest?command=scedule&master=${item}">
                 <c:out value="${item}"/>
             </a></td>
         </tr>

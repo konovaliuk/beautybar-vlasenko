@@ -124,6 +124,11 @@ public class WorkerDAOImpl extends AbstractDAO<Long, Worker> implements IWorkerD
     }
 
     @Override
+    public Worker findByEmail(String login) throws Exception {
+        return findOneByDynamicSelect(SQL_SELECT_FROM + SQL_INNER_JOIN + " WHERE EMAIL = ?", new Object[]{login});
+    }
+
+    @Override
     public String getTableName() {
         return "worker";
     }

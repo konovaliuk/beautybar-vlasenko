@@ -59,4 +59,12 @@ public interface IWorkerDAO {
      */
     Worker update(Worker entity) throws SQLException;
 
+    /**
+     * Gets entity from database by email
+     *
+     * @param login
+     * @return Client with the given email
+     * @throws Exception
+     */
+    Worker findByEmail(String login) throws Exception;
 }

@@ -6,6 +6,7 @@ public enum Parameter {
     COMMENT("comment"),
     PAGENUMBER("pagenumber"),
     PAGENUMBERS("pagenumbers"),
+    BOOKINGS("bookings"),
     TOTALPAGES("totalPages"),
     FEEDBACKS("feedbacks"),
     MARK("mark"),

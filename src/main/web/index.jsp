@@ -27,6 +27,8 @@
   <a href ="Servlettest?command=chooseservicetype">Записаться</a>
   <br/>
   <a href ="Servlettest?command=feedbackmasters">Ocтавить отзыв</a>
+  <a href="../jsp/workerlogin.jsp">Для работников</a>
+
 
   <hr/>
   </body>

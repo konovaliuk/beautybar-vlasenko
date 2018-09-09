@@ -27,6 +27,9 @@ public class Config {
     public static final String RECORDBOOKING = "RECORDBOOKING";
     public static final String FEEDBACKMASTERS = "FEEDBACKMASTERS";
     public static final String WRITEFEEDBACK = "WRITEFEEDBACK";
+    public static final String WORKERLOGIN = "WORKERLOGIN";
+    public static final String MASTERS = "MASTERS";
+    public static final String SCEDULE = "SCEDULE";
 
     public static Config getInstance() {
         if (instance == null) {

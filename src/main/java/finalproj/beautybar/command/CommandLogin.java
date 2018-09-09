@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import finalproj.beautybar.manager.Parameter;
+import finalproj.beautybar.manager.Password;
 import finalproj.beautybar.service.LoginService;
 
 public class CommandLogin implements ICommand {
@@ -34,12 +35,17 @@ public class CommandLogin implements ICommand {
 
         if (loginService.authentificate(login, password)) {
             session.setAttribute(Parameter.USER.toString(), login);
-            page = request.getRequestURI() +       // "/servlettest"
-                    "?" + session.getAttribute(Parameter.CURRENTQUERY.toString()).toString();
+            if (session.getAttribute(Parameter.CURRENTQUERY.toString()) == null){
+                page = Config.getInstance().getProperty(Config.INDEX);
+            } else {
+                page = request.getRequestURI() +       // "/servlettest"
+                        "?" + session.getAttribute(Parameter.CURRENTQUERY.toString()).toString();
+            }
         } else {
             request.setAttribute("error", Message.getInstance().getProperty(Message.LOGIN_ERROR));
             page = Config.getInstance().getProperty(Config.ERROR);
         }
+        System.out.println(Password.hashPassword("admin"));
 
         return page;
     }

@@ -29,7 +29,7 @@
 
 <table>
     <tr>
-        <th>Oтзыв</th><th>Оценка</th><th>Дата</th>
+        <th>Oтзыв</th><th>Оценка</th><th>Дата</th><th>Мастер</th>
     </tr>
     <c:forEach items="${feedbacks}" var = "item">
 
@@ -42,6 +42,9 @@
             </td>
             <td>
                 <c:out value="${item.date}"/>
+            </td>
+            <td>
+                <c:out value="${item.worker.name}"/>
             </td>
         </tr>
     </c:forEach>
