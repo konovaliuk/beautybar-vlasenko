@@ -1,13 +1,14 @@
 package finalproj.beautybar.command;
 
 import finalproj.beautybar.entity.Booking;
+import finalproj.beautybar.entity.Feedback;
 import finalproj.beautybar.manager.Config;
+import finalproj.beautybar.manager.Paginator;
 import finalproj.beautybar.manager.Parameter;
 import finalproj.beautybar.service.ChooseDateService;
-import processing.data.JSONArray;
+import finalproj.beautybar.service.FeedbackService;
+import org.apache.log4j.Logger;
 import processing.data.JSONObject;
-//import org.codehaus.jettison.json.JSONArray;
-//import org.codehaus.jettison.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,8 @@ import java.util.*;
 public class CommandSchedule implements ICommand{
     private static CommandSchedule instance;
     private CommandSchedule(){}
+    private static final Logger logger = Logger.getLogger(CommandSchedule.class);
+
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse responce) throws Exception {
@@ -28,13 +31,11 @@ public class CommandSchedule implements ICommand{
         session.setAttribute(Parameter.MASTER.toString(), masterName);
         List<Booking> bookingList = ChooseDateService.getChooseDateService().getAllBookingsByMasterAfterCurrentDate(masterName);
         List bookings = new ArrayList();
-        JSONArray jsonArray = new JSONArray();
         for (int i = 0; i < bookingList.size(); i++) {
 
             JSONObject item = new JSONObject();
 
             DateFormat dateFormat=new SimpleDateFormat("yyyy/MM/dd HH:mm");
-//            yourJsonObject.accumulate("yourDateVarible",dateFormat.format(new Date()));
             String start = dateFormat.format(bookingList.get(i).getTimestamp());
             System.out.println(start);
             Calendar calendar = Calendar.getInstance();
@@ -45,12 +46,21 @@ public class CommandSchedule implements ICommand{
             item.setString("title", bookingList.get(i).getWorkerService().getService().getName());
             item.setString("start", start);
             item.setString("end", end);
-
-            jsonArray.setJSONObject(i, item);
             bookings.add(item);
 
         }
-        session.setAttribute(Parameter.BOOKINGS.toString(), bookings);
+        logger.debug(session.getAttribute(Parameter.ROLEID.toString()) + " = roleId");
+        if (session.getAttribute(Parameter.ROLEID.toString()).toString().equals("1")) {
+            session.setAttribute(Parameter.BOOKINGS.toString(), bookings);
+            int pageNumber = Integer.parseInt(request.getParameter(Parameter.PAGENUMBER.toString()));
+            FeedbackService feedbackService = FeedbackService.getFeedbackService();
+            int maxResult = 5;
+            Paginator paginator = new Paginator(feedbackService.getCountRows(), pageNumber, maxResult, 4);
+            List<Feedback> feedbacks = feedbackService.getFeedbacks(paginator.getFromRecordIndex(), maxResult);
+            session.setAttribute(Parameter.FEEDBACKS.toString(), feedbacks);
+            session.setAttribute(Parameter.PAGENUMBERS.toString(), paginator.getNavigationPages());
+            session.setAttribute(Parameter.TOTALPAGES.toString(), paginator.getTotalPages());
+        }
         page = Config.getInstance().getProperty(Config.SCEDULE);
         return page;
     }

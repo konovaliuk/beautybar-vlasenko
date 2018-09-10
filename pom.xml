@@ -47,6 +47,7 @@
                                 <include>jsp/login.jsp</include>
                                 <include>jsp/signup.jsp</include>
                                 <include>jsp/*.jsp</include>
+                                <include>source/*</include>
                                 <include>jsp/error.jspx</include>
                                 <include>js/app.1534511936603.js</include>
                                 <include>js/babel-polyfill.1534511936603.js</include>

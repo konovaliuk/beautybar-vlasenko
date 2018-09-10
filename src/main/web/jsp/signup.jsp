@@ -9,7 +9,20 @@
 <html>
 <head>
     <title>Sign up</title>
+    <link rel="stylesheet" href="../css/styles.css">
+
 </head>
+<div class="topnav">
+    <a href ="../index.jsp">Главная</a>
+    <a href ="../Servlettest?command=chooseservicetype">Записаться</a>
+    <a href ="../Servlettest?command=feedbackmasters">Ocтавить отзыв</a>
+    <div class="topnav-right">
+        <a href="../jsp/login.jsp">Войти</a>
+        <br/>
+        <a href="../jsp/signup.jsp">Зарегистрироваться</a>
+    </div>
+</div>
+<img  src = "../source/the-beauty-bar-logo-400px.jpg">
 <body>
     <h3>Sign up</h3>
     <hr/>

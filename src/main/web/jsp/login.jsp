@@ -9,10 +9,21 @@
 <html>
     <head>
         <title>JSP Page</title>
+        <link rel="stylesheet" href="../css/styles.css">
+
     </head>
     <body>
-        <h3>Login</h3>
-        <hr/>
+    <div class="topnav">
+        <a href ="../index.jsp">Главная</a>
+        <a href ="../Servlettest?command=chooseservicetype">Записаться</a>
+        <a href ="../Servlettest?command=feedbackmasters">Ocтавить отзыв</a>
+        <div class="topnav-right">
+            <a href="../jsp/login.jsp">Войти</a>
+            <br/>
+            <a href="../jsp/signup.jsp">Зарегистрироваться</a>
+        </div>
+    </div>
+    <img  src = "../source/the-beauty-bar-logo-400px.jpg">
         <form name="loginForm" method="POST" action="../Servlettest">
             <input type="hidden" name="command" value ="login"/>
             Login:<br/>

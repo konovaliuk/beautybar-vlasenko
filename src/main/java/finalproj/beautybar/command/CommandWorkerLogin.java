@@ -24,12 +24,13 @@ public class CommandWorkerLogin implements ICommand{
         String password = request.getParameter(Parameter.PASSWORD.toString());
 
         if (workerLoginService.authentificate(login, password)) {
-            session.setAttribute(Parameter.USER.toString(), login);
+            session.setAttribute(Parameter.WORKERLOGIN.toString(), login);
 
             List<String> list = new ArrayList<>();
             list = chooseMasterService.getAllMastersNames();
             session.setAttribute(Parameter.MASTERS.toString(), list);
-
+            long roleId = workerLoginService.getRole(login);
+            session.setAttribute(Parameter.ROLEID.toString(), roleId);
             page = Config.getInstance().getProperty(Config.MASTERS);
 
         } else {

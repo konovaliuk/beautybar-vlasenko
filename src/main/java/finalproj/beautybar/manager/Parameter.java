@@ -25,7 +25,9 @@ public enum Parameter {
     USER("user"),
     FREETIMES("freetimes"),
     TIME("time"),
-    TIMESTAMP("timestamp");
+    TIMESTAMP("timestamp"),
+    WORKERLOGIN("workerlogin"),
+    ROLEID("roleid");
 
     private String param;
 

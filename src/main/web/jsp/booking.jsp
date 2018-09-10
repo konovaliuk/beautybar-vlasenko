@@ -10,6 +10,7 @@
 <html>
 <head>
     <style type="text/css">[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}  ng\:form{display:block;}  .ng-animate-shim{visibility:hidden;}  .ng-anchor{position:absolute;}</style>
+    <link rel="stylesheet" href="../css/styles.css">
 
     <base href="/">
     <meta charset="UTF-8">
@@ -111,6 +112,17 @@
 <body class="h100 light-background-color desktop"
       ng-class="{'without-header' : $root.ySettings.style.show_header === false}" data-gr-c-s-loaded="true"
       style="min-height: 356px;">
+<div class="topnav">
+    <a href ="../index.jsp">Главная</a>
+    <a href ="Servlettest?command=chooseservicetype">Записаться</a>
+    <a href ="Servlettest?command=feedbackmasters">Ocтавить отзыв</a>
+    <div class="topnav-right">
+        <a href="../jsp/login.jsp">Войти</a>
+        <br/>
+        <a href="../jsp/signup.jsp">Зарегистрироваться</a>
+    </div>
+</div>
+<img  src = "../source/the-beauty-bar-logo-400px.jpg">
 
 <div class="main-animated-circle-loader" style="display: none;">
 </div>

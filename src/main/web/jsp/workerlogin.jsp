@@ -9,6 +9,8 @@
 <html>
     <head>
         <title>JSP Page</title>
+        <link rel="stylesheet" href="../css/styles.css">
+
     </head>
     <body>
         <h3>Workers Login</h3>

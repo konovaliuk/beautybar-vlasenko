@@ -94,6 +94,7 @@
 <link rel="stylesheet" href="../css/vendor1535711697016.css">
 <link rel="stylesheet" href="../css/application1535711697016.css">
 
+
 <script src="../js/babel-polyfill.1535711700647.js"></script>
 <script src="../js/vendor.1535711700647.js"></script>
 <script src="app.1535711700647.js"></script>
