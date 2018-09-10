@@ -10,8 +10,11 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="../css/styles.css">
+
 </head>
 <body>
+<c:out value="${user}, Hello!"/>
 <form name="feedback" method="POST" action="../Servlettest">
     <input type="hidden" name="command" value="postfeedback"/>
     Напишите свое мнение:<br/>
@@ -50,8 +53,10 @@
     </c:forEach>
 </table>
 
+
 <c:if test="${totalPages > 1}">
     <div class="page-navigator">
+        <div class="pagination">
         <c:forEach items="${pagenumbers}" var = "pagenumber">
             <c:if test="${pagenumber != -1 }">
                 <a href="Servlettest?command=writefeedback&pagenumber=${pagenumber}" class="nav-item">${pagenumber}</a>
@@ -60,7 +65,9 @@
                 <span class="nav-item"> ... </span>
             </c:if>
         </c:forEach>
+        </div>
     </div>
 </c:if>
+
 </body>
 </html>

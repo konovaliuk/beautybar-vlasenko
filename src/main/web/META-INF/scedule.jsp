@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2018.2.620/styles/kendo.common.min.css" />
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2018.2.620/styles/kendo.blueopal.min.css" />
 
+
     <script src="http://kendo.cdn.telerik.com/2018.2.620/js/jquery.min.js"></script>
     <script>
         if (typeof jQuery == "undefined") {
@@ -116,6 +117,18 @@
 
 </head>
 <body>
+<div class="topnav">
+    <a href ="../index.jsp">Главная</a>
+    <a href ="Servlettest?command=chooseservicetype">Записаться</a>
+    <a href ="Servlettest?command=feedbackmasters">Ocтавить отзыв</a>
+    <div class="topnav-right">
+        <a href="../jsp/login.jsp">Войти</a>
+        <br/>
+        <a href="../jsp/signup.jsp">Зарегистрироваться</a>
+    </div>
+</div>
+<img  src = "source/the-beauty-bar-logo-400px.jpg">
+<h5></h5><c:out value="${master}"/></body>
 <div id="example">
     <div id="team-schedule">
 
@@ -151,6 +164,40 @@
         });
     });
 </script>
+<table>
+    <tr>
+        <th>Oтзыв</th><th>Оценка</th><th>Дата</th><th>Мастер</th>
+    </tr>
+    <c:forEach items="${feedbacks}" var = "item">
+
+        <tr>
+            <td>
+                <c:out value="${item.text}"/>
+            </td>
+            <td>
+                <c:out value="${item.mark}"/>
+            </td>
+            <td>
+                <c:out value="${item.date}"/>
+            </td>
+            <td>
+                <c:out value="${item.worker.name}"/>
+            </td>
+        </tr>
+    </c:forEach>
+</table>
+<c:if test="${totalPages > 1}">
+    <div class="page-navigator">
+        <c:forEach items="${pagenumbers}" var = "pagenumber">
+            <c:if test="${pagenumber != -1 }">
+                <a href="Servlettest?command=schedule&pagenumber=${pagenumber}" class="nav-item">${pagenumber}</a>
+            </c:if>
+            <c:if test="${pagenumber == -1 }">
+                <span class="nav-item"> ... </span>
+            </c:if>
+        </c:forEach>
+    </div>
+</c:if>
 <style>
 
     .k-nav-current > .k-link span + span {

@@ -9,27 +9,29 @@
 <html>
   <head>
     <title>$Title$</title>
+    <link rel="stylesheet" href="css/styles.css">
+
   </head>
   <body>
 
-  <form action="Servlettest" >
     <%--<jsp: param name="command" value="login"/>--%>
-      <input type="submit" value="Execute">
-  </form>
-  <h3>Login</h3>
+      <div class="topnav">
+        <a href ="index.jsp">Главная</a>
+        <a href ="Servlettest?command=chooseservicetype">Записаться</a>
+        <a href ="Servlettest?command=feedbackmasters">Ocтавить отзыв</a>
+        <div class="topnav-right">
+          <a href="../jsp/login.jsp">Войти</a>
+          <br/>
+          <a href="../jsp/signup.jsp">Зарегистрироваться</a>
+        </div>
+      </div>
+    <img  src = "source/the-beauty-bar-logo-400px.jpg">
+    <div class="fixed">
+  <a href="../jsp/workerlogin.jsp">Для персонала</a>
+    </div>
+
+
   <hr/>
 
-  <a href="../jsp/login.jsp">Войти</a>
-  <br/>
-  <a href="../jsp/signup.jsp">Зарегистрироваться</a>
-  <br/>
-  <br/>
-  <a href ="Servlettest?command=chooseservicetype">Записаться</a>
-  <br/>
-  <a href ="Servlettest?command=feedbackmasters">Ocтавить отзыв</a>
-  <a href="../jsp/workerlogin.jsp">Для работников</a>
-
-
-  <hr/>
   </body>
 </html>

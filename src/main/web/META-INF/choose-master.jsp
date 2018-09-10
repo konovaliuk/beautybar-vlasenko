@@ -10,7 +10,9 @@
 <html>
 <head>
     <title>Title</title>
+
 </head>
+<c:out value="${user}, Hello!"/>
 <body class="h100 light-background-color desktop"
       ng-class="{'without-header' : $root.ySettings.style.show_header === false}" data-gr-c-s-loaded="true"
       style="min-height: 326px;">
@@ -205,19 +207,9 @@
 
                                                                             <div class="y-master-card__cell y-master-card__cell_relative">
                                                                                 <!-- ngIf: ::$ctrl.master.comments_count > 0 && $ctrl.master.show_rating -->
-                                                                                <y-reviews-button
-                                                                                        data-block="$ctrl.master.review-button"
-                                                                                        ng-if="::$ctrl.master.comments_count > 0 &amp;&amp; $ctrl.master.show_rating"
-                                                                                        class="master-reviews-link ng-scope ng-isolate-scope"
-                                                                                        is-charge-active="$ctrl.company.is_charge_active"
-                                                                                        is-disable-card="$ctrl.isDisableCard"
-                                                                                        master="$ctrl.master">
-                                                                                    <div class="y-reviews-button"
-                                                                                         ng-click="$event.stopPropagation(); $ctrl.goToReviews($ctrl.master);">
-                                                                                        <a class="ng-binding">264
-                                                                                            отзыва</a>
-                                                                                    </div>
-                                                                                </y-reviews-button>
+
+
+
                                                                                 <!-- end ngIf: ::$ctrl.master.comments_count > 0 && $ctrl.master.show_rating -->
                                                                             </div>
 

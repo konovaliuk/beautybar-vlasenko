@@ -13,6 +13,8 @@
     <html>
         <head>
             <title> Hello !</title>
+            <link rel="stylesheet" href="../css/styles.css">
+
         </head>
         <body><h3>Hello !</h3>
             <hr/>

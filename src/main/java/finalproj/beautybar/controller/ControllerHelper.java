@@ -24,7 +24,7 @@ public class ControllerHelper {
         commands.put("postfeedback",  CommandPostFeedback.getInstance());
         commands.put("workerlogin",  CommandWorkerLogin.getInstance());
         commands.put("masters",  CommandMasters.getInstance());
-        commands.put("scedule",  CommandSchedule.getInstance());
+        commands.put("schedule",  CommandSchedule.getInstance());
 
 
     }

@@ -29,7 +29,8 @@ public class CommandWorkerLogin implements ICommand{
             List<String> list = new ArrayList<>();
             list = chooseMasterService.getAllMastersNames();
             session.setAttribute(Parameter.MASTERS.toString(), list);
-
+            long roleId = workerLoginService.getRole(login);
+            session.setAttribute(Parameter.ROLEID.toString(), roleId);
             page = Config.getInstance().getProperty(Config.MASTERS);
 
         } else {
